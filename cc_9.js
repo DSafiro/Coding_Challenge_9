@@ -29,6 +29,12 @@ class Manager extends Employee {
     calculateBonus () {
         return super.calculateAnnualSalary() * 0.10; // Calculates bonus by calling calculateAnnualSalary and multiplying by 0.10
     }; // Creates method that returns calculated bonus
+    
+// **** Part of Task 4: Implemented Payroll System ****
+    calculateAnnualSalary () {
+        return super.calculateAnnualSalary() + this.calculateBonus(); // Updates annual salary to include bonuses for managers
+    }; // Updated calculateAnnualSalary that includes bonuses
+
 };  // Declares Manager class with attributes
 const mgr1 = new Manager("John Smith", 201, "IT", 8000, 5); // Creates new manager object
 console.log(mgr1.getDetails());// Produces expected output of "Manager: John Smith, ID: 201, Department: IT, Salary: $8000, Team Size: 5"
@@ -44,10 +50,19 @@ class Company {
         return this.employees.push(employee); // Adds new employees to array
     }; // Creates a method to add employees
     listEmployees() {
-        this.employees.forEach(employee => console.log(employee.getDetails())); // Outputs list of employees
+        return this.employees.forEach(employee => console.log(employee.getDetails())); // Outputs list of employees
     }; // Creates a method that lists employee
+
+// **** Part of Task 4: Implemented Payroll System ****
+    calculateTotalPayroll () {
+        return this.employees.reduce((total, employee) => total + employee.calculateAnnualSalary(), 0); // Calculates the sum of all employee salaries
+    }; // Creates a method that calculates total payroll
+
 }; // Declares Company class with attributes
 const company = new Company("TechCorp"); // Creates new company
 company.addEmployee(emp1); // Adds employee to company
 company.addEmployee(mgr1); // Adds manager to company
 company.listEmployees(); // Produces expected output of  "Employee: Alice Johnson, ID: 101, Department: Sales, Salary: $5000" and "Manager: John Smith, ID: 201, Department: IT, Salary: $8000, Team Size: 5"
+
+// Task 4: Implemented Payroll System
+console.log(company.calculateTotalPayroll()); // Produces expected output of 165600 
