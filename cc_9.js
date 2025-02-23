@@ -16,3 +16,20 @@ class Employee {
 const emp1 = new Employee("Alice Johnson", 101, "Sales", 5000); // Creates new employee object
 console.log(emp1.getDetails()); // Produces expected output of "Employee: Alice Johnson, ID: 101, Department: Sales, Salary: $5000"
 console.log(emp1.calculateAnnualSalary()); // Produces expected output of 60000
+
+// Task 2: Created Manager Class with Inheritance
+class Manager extends Employee {
+    constructor (name, id, department, salary, teamSize) {
+        super(name, id, department, salary); // Calls previous constructor from Employee class
+        this.teamSize = teamSize; // Assigns team size property
+    };
+    getDetails() {
+       return `Manager: ${this.name}, ID: ${this.id}, Department: ${this.department}, Salary: $${this.salary}, Team Size: ${this.teamSize}`; // Returns manager details with updated team size
+    }; // Updated getDetails method
+    calculateBonus () {
+        return super.calculateAnnualSalary() * 0.10; // Calculates bonus by calling calculateAnnualSalary and multiplying by 0.10
+    }; // Creates method that returns calculated bonus
+};  // Declares Manager class with attributes
+const mgr1 = new Manager("John Smith", 201, "IT", 8000, 5); // Creates new manager object
+console.log(mgr1.getDetails());// Produces expected output of "Manager: John Smith, ID: 201, Department: IT, Salary: $8000, Team Size: 5"
+console.log(mgr1.calculateBonus());  // Produces expected output of 9600
